@@ -1,0 +1,96 @@
+#:import Settings Settings
+
+<Bbutton@Button>
+
+	background_color: 1,0,0,0
+	background_normal: ""
+	color: .5,1,1,1
+	font_size: 12
+	size_hint: None,None
+	size: 100,100
+	on_release:
+		self.color = 1,1,1,1
+
+<SettingsScreen>:
+
+	BoxLayout:
+		padding: 0
+		canvas:
+			Color:
+				rgba: 1,0,0,1
+			Rectangle:
+				size: self.width,self.height
+				source:'Layout/creek.jpg'
+			Color:
+				rgba: 0,1,1,.5
+			Ellipse:
+				size: 100,100
+				pos: 20,150
+				source:'Layout/Eyes.png'
+			Color:
+				rgba: 0,0,1,.5
+			Ellipse:
+				size: 100,100
+				pos: 125,150
+				source:'Layout/Eyes.png'
+			Color:
+				rgba: 0,1,0,.5
+			Ellipse:
+				size: 100,100
+				pos: 230,150
+				source:'Layout/Eyes.png'
+
+		BoxLayout:
+			orientation: "vertical"
+			size: root.width, root.height
+
+			Label:
+				text: "Runistica\n [size=12]Consult the secret Germanic stones [/size]"
+				font_size: 60
+				halign: "center"
+				size_hint:(.25,1)
+				pos_hint:{"center_x":0.5}
+				markup: True
+
+			BoxLayout:
+				orientation: "horizontal"
+				spacing:20
+
+				Bbutton:
+					text: "Jouw\n DagRune\n werpen"
+					halign: "left"
+					font_size: 12
+					size_hint: (1,0.2)
+					pos_hint: {"center_x":0.5,"center_y": 0.5}
+					on_press:
+						root.manager.current="singlerunescreen"
+						root.manager.transition.direction = "left"
+
+				Bbutton:
+					text: "Een\n Ja-of-Néé vraag\n stellen"
+					halign: "center"
+					font_size: 12
+					size_hint: (1,0.2)
+					pos_hint:{"center_x": 0.5,"center_y": 0.5}
+					on_press:
+						root.manager.current="janeescreen"
+						root.manager.transition.direction = "left"
+
+				Bbutton:
+					text: "Een\n openvraag\n stellen"
+					halign: "right"
+					font_size: 12
+					size_hint: (1,0.2)
+					pos_hint:{"center_x": 0.5,"center_y": 0.5}
+					on_press:
+						root.manager.current = "keltischkruisscreen"
+						root.manager.transition.direction = "left"
+
+			Button:
+				text: "Quit"
+				font_size:10
+				background_color: [0,0,0,1]
+				background_normal: ""
+				size_hint:(1,.1)
+
+				on_press: quit()

@@ -1,0 +1,105 @@
+#:import JaNee JaNee
+
+<RuneLabel@Label>:
+
+	font_size: 12
+	color:1,1,1,1
+	size_hint: (1,.1)
+
+<JaNeeScreen>:
+
+	BoxLayout
+		orientation: "vertical"
+		padding:0
+
+		canvas:
+			Color:
+				rgba: 1,0,1,1
+			Rectangle:
+				size: self.width, self.height
+				source: "Layout/tree.jpg"
+
+			Color:
+				rgba:1,1,1,.75
+			Ellipse:
+				size:100,100
+				pos: self.center_x-160,self.center_y-60
+			Ellipse:
+				size:100,100
+				pos: self.center_x-50,self.center_y-60
+			Ellipse:
+				size:100,100
+				pos: self.center_x+60,self.center_y-60
+
+		Label:
+			text: "Ja/Néé vragen\n [color=#FFFFFF][size=12]3 stenen werpen voor een antwoord [/color][/size] "
+			color: 0,1,0,1
+			font_size: 30
+			size_hint:(1,1)
+			pos_hint:{"center_x":.5}
+			markup:True
+
+		GridLayout:
+			cols: 3
+			columns:2
+			size_hint:None,None
+			size: 350,120
+
+			Image:
+				id: _plaatje1
+				source: "RunenTekens/isa.png"
+			Image:
+				id: _plaatje2
+				source: "RunenTekens/ehwaz.png"
+			Image:
+				id: _plaatje3
+				source: "RunenTekens/berkana.png"
+
+			RuneLabel:
+				id: _RuneNaam1
+				text: "-1-"
+			RuneLabel:
+				id: _RuneNaam2
+				text: "-2-"
+			RuneLabel:
+				id: _RuneNaam3
+				text: "-3-"
+		Label:
+			id: _UitlegAntwoord
+			text: "Stel je vraag\n en werp jouw runenstenen"
+			text_size: (185,None)
+			font_size: 12
+			italic:True
+			color:1,0,0,1
+			size_hint: (1,.60)
+
+			canvas.before:
+				Color:
+					rgba: 1,1,1,1
+
+				RoundedRectangle:
+					size:self.width - 90 , self.height-70
+					pos: self.center_x-125, self.center_y-60
+
+		Button:
+			text:"<< Werp >>"
+			font_size:13
+			color: 1,1,1,1
+			background_color: 1,1,1,0.2
+			size_hint: (.4,.1)
+			pos_hint:{"center_x":0.5}
+			on_press:
+				root.runensetwerpen()
+
+		Button:
+			text:"<< Back >>"
+			font_size:13
+			color: 1,1,1,1
+			background_color: 0,0,1,0
+			size_hint: (.2,.1)
+			pos_hint:{"center_y":0.25,"center_x":0.75}
+			on_press:
+				_plaatje1.source = "RunenTekens/isa.png"
+				_RuneNaam1.text= "-1-"
+				root.manager.current="settingsscreen"
+				root.manager.transition.direction="right"
