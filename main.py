@@ -8,11 +8,11 @@ from kivy.app import App
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager
 
-Builder.load_file('Welcome.kv')
-Builder.load_file('Settings.kv')
+Builder.load_file('welcome.kv')
+Builder.load_file('settings.kv')
 Builder.load_file('jaNee.kv')
-Builder.load_file('KeltischKruis.kv')
-Builder.load_file('SingleRune.kv')
+Builder.load_file('keltischKruis.kv')
+Builder.load_file('singleRune.kv')
 
 class RunenScreenManager(ScreenManager):
 	pass

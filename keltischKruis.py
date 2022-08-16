@@ -112,7 +112,7 @@ class KeltischKruisScreen(Screen):
 		label1 = Label(text=runeuitleg[0]+": "+runeuitleg[1], font_size=28, bold=True,
 					   halign="left", color=[1, 0, 0, 1], size_hint=(1, .1))
 		label2 = Label(text=format(runeuitleg[2]), font_size=18,
-					   halign="left", text_size=(self.width-150, None), color=[1, 1, 1, 1], size_hint=(1, .1))
+					   halign="left", text_size=(350, None), color=[1, 1, 1, 1], size_hint=(1, .1))
 
 		b1.add_widget(label1)
 		b1.add_widget(label2)
@@ -127,7 +127,7 @@ class KeltischKruisScreen(Screen):
 							separator_height= 1,
 						  content=b,
 						  size_hint=(None, None),
-						  size=(300, 500),
+						  size=(500, 700),
 						  pos_hint= {"center_x":.5,"center_y":.5},
 							background_color=[1, 1, 1, 1],
 							background="Layout/road.jpg",
