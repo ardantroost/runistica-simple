@@ -1,9 +1,18 @@
 #: import singleRune singleRune
 
+<AnchorButton@Button>:
+	text: ""
+	size_hint:None,None
+	size: 50,30
+	color:[1,1,1,1]
+	font_size:dp(12)
+	background_color:1,1,1,0
+
 <SingleRuneScreen>:
 
 	BoxLayout:
 		orientation:"vertical"
+		padding:20
 
 		canvas:
 			Color:
@@ -11,12 +20,9 @@
 			Rectangle:
 				size: self.width,self.height
 				source:"Layout/road.jpg"
-			#Color:
-			#	rgba: 1,1,1,1
-			#Ellipse:
-			#	size:300,300
-			#	pos:300,300
-
+		Label:
+			text: ""
+			size_hint:(1,.6)
 		Label:
 			text: "Today's Rune\n [color=#FFFFFF][size=24]Werp jouw dagvoorspelling [/color][/size] "
 			color: 1,1,1,1
@@ -61,14 +67,27 @@
 
 				on_press:
 					root.Worp()
+	AnchorLayout:
+		anchor_x: "right"
+		anchor_y: "top"
 
-			Button:
-				text:"<< Menu >>"
-				font_size:dp(14)
-				color: 1,1,1,1
-				background_color:1,1,1,0
-				size_hint: (.1,.05)
-				pos_hint:{"center_x": 0.75}
+		BoxLayout:
+			orientation: 'horizontal'
+			#padding:25
+			#spacing:50
+			padding:15
+			size_hint: None, None
+			size: self.minimum_size
+
+			AnchorButton:
+				text: "Menu"
+				font_size: dp(13)
 				on_press:
 					root.manager.current="settingsscreen"
 					root.manager.transition.direction="right"
+
+			AnchorButton:
+				text: "Quit"
+				font_size: dp(13)
+				on_press:
+					quit()
