@@ -22,9 +22,9 @@ class SingleRuneScreen(Screen):
 			self.Image1 = Image(source=RuneWorp1)
 			self.b1 = BoxLayout(orientation="vertical",spacing=10)
 			self.label1 = Label(text=keuze_naam+": \n"+ keuze_Credo,
-								font_size=32,bold=True,halign="left",color=[1,0,0,1], size_hint=(1,.1))
+								font_size=36,bold=True,halign="left",color=[1,0,0,1], size_hint=(1,.1))
 			self.label2 = Label(text="Keywords of the message: \n {}".format(keuze_RuneText),
-						   font_size=18,halign="left",text_size=(350, None),color=[1,1,1,1],size_hint=(1,.1))
+						   font_size=28,halign="left",text_size=(350, None),color=[1,1,1,1],size_hint=(1,.1))
 
 			self.b1.add_widget(self.label1)
 			self.b1.add_widget(self.label2)
@@ -34,6 +34,7 @@ class SingleRuneScreen(Screen):
 			self.PopupWorp = Popup(title="Today's rune for you",
 							  separator_color = [1,0,0,.6],
 							  content=self.b,
+							  title_size=28,
 							  size_hint=(None,None),
 							  size= (500,700),
 							  pos_hint= {"center_x":.5,"center_y":.5},

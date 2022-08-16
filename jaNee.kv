@@ -10,7 +10,7 @@
 		Ellipse:
 			size:self.size
 			pos: self.pos
-	source:""
+	source:"RunenTekens/gebo.png"
 	size_hint:None,None
 	width:75
 	height:75
@@ -22,7 +22,7 @@
 	background_normal:""
 	canvas.before:
 		Color:
-			rgba: [1,1,1,1]
+			rgba: [1,1,1,.21]
 		RoundedRectangle:
 			size: self.size
 			pos:self.pos
@@ -30,6 +30,7 @@
 	font_size: dp(24)
 	halign:"center"
 	valign:"center"
+	size_hint:(1,.25)
 	pos_hint:{"center_x":.5, "center_y":.3}
 
 <RuneLabel@Label>:
@@ -59,9 +60,10 @@
 				size: self.width, self.height
 				source: "Layout/road.jpg"
 		Label:
-			text: "Ja/Néé vragen\n [color=#FFFFFF][size=12]3 stenen werpen voor een antwoord [/color][/size] "
+			text: "Yes-or-No questions\n [color=#FFFFFF][size=24] throw 3  runes for an answer[/color][/size] "
 			color: 0,1,0,1
 			font_size: dp(30)
+			valign:"center"
 			size_hint:(1,1)
 			pos_hint:{"center_x":.5}
 			markup:True
@@ -78,7 +80,7 @@
 				orientation: "vertical"
 				RuneImage:
 					id: _plaatje1
-					source: "Runentekens/gebo.png"
+					#source: ""
 				RuneLabel:
 					id: _RuneNaam1
 					text: "-1-"
@@ -87,7 +89,7 @@
 				orientation: "vertical"
 				RuneImage:
 					id: _plaatje2
-					source: "Runentekens/gebo.png"
+					#source: "Runentekens/gebo.png"
 				RuneLabel:
 					id: _RuneNaam2
 					text: "-2-"
@@ -97,7 +99,7 @@
 
 				RuneImage:
 					id: _plaatje3
-					source: "Runentekens/gebo.png"
+					#source: "Runentekens/gebo.png"
 				RuneLabel:
 					id: _RuneNaam3
 					text: "-3-"
@@ -105,7 +107,7 @@
 
 		AntwLabel:
 			id: _UitlegAntwoord
-			text: "Ask your yes-or-no question\n and throw the runestones"
+			text: "Ask a yes-or-no question\n and throw the runestones"
 			text_size: (self.width-50,None)
 			font_size: dp(14)
 			halign: "left"
@@ -115,8 +117,8 @@
 
 
 		Button:
-			text:"<< Throw >>"
-			font_size:dp(13)
+			text:"<< Throw runes>>"
+			font_size:dp(14)
 			color: 1,1,1,1
 			background_color: 1,1,1,0
 			size_hint: (.4,.25)
@@ -131,7 +133,7 @@
 		BoxLayout:
 			orientation: 'horizontal'
 			#padding:25
-			spacing:50
+			spacing:60
 			padding:15
 			size_hint: None, None
 			size: self.minimum_size
@@ -140,8 +142,14 @@
 				text: "Menu"
 				font_size: dp(13)
 				on_press:
-					_plaatje1.source = "RunenTekens/isa.png"
+					_plaatje1.source = "RunenTekens/gebo.png"
+					_plaatje2.source = "RunenTekens/gebo.png"
+					_plaatje3.source = "RunenTekens/gebo.png"
 					_RuneNaam1.text= "-1-"
+					_RuneNaam2.text= "-2-"
+					_RuneNaam3.text= "-3-"
+
+
 					root.manager.current="settingsscreen"
 					root.manager.transition.direction="right"
 

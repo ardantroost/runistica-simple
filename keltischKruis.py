@@ -8,7 +8,7 @@ from kivy.uix.image import Image
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
-from kivy.uix.boxlayout import BoxLayout
+
 
 class KeltischKruisScreen(Screen):
 
@@ -25,7 +25,6 @@ class KeltischKruisScreen(Screen):
 
 		runeworp = random.sample(rune_set,5)
 
-
 		conn.commit()
 		conn.close()
 		self.RunenDisplay(runeworp)
@@ -38,16 +37,22 @@ class KeltischKruisScreen(Screen):
 		help = runeworp[3]
 		obstacle = runeworp[4]
 
+
+		a= "RunenTekens/" + (runeworp[0][0]).lower() + ".png"
+		b= "RunenTekens/" + (runeworp[1][0]).lower() + ".png"
+		c= "RunenTekens/" + (runeworp[2][0]).lower() + ".png"
+		d= "RunenTekens/" + (runeworp[3][0]).lower() + ".png"
+		e= "RunenTekens/" + (runeworp[4][0]).lower() + ".png"
 		self.ids._PastButton.text = runeworp[0][0]
-		self.ids._PastImage.source = "RunenTekens/" + (runeworp[0][0]).lower() + ".png"
+		self.ids._PastImage.source = a
 		self.ids._PresentButton.text =  runeworp[1][0]
-		self.ids._PresentImage.source = "RunenTekens/" + (runeworp[1][0]).lower() + ".png"
+		self.ids._PresentImage.source = b
 		self.ids._FutureButton.text =  runeworp[2][0]
-		self.ids._FutureImage.source = "RunenTekens/" + (runeworp[2][0]).lower() + ".png"
+		self.ids._FutureImage.source = c
 		self.ids._HelpButton.text =  runeworp[3][0]
-		self.ids._HelpImage.source = "RunenTekens/" + (runeworp[3][0]).lower() + ".png"
+		self.ids._HelpImage.source = d
 		self.ids._ObstacleButton.text = runeworp[4][0]
-		self.ids._ObstacleImage.source = "RunenTekens/" + (runeworp[4][0]).lower() + ".png"
+		self.ids._ObstacleImage.source = e
 
 	def Rune_interpretatie(self, Runesign):
 
@@ -109,9 +114,9 @@ class KeltischKruisScreen(Screen):
 		Image1 = Image(source="RunenTekens/"+ (runeuitleg[0]).lower()+ ".png")
 		b1 = BoxLayout(orientation="vertical", spacing=10)
 
-		label1 = Label(text=runeuitleg[0]+": "+runeuitleg[1], font_size=28, bold=True,
+		label1 = Label(text=runeuitleg[0]+": "+runeuitleg[1], font_size=36, bold=True,
 					   halign="left", color=[1, 0, 0, 1], size_hint=(1, .1))
-		label2 = Label(text=format(runeuitleg[2]), font_size=18,
+		label2 = Label(text=format(runeuitleg[2]), font_size=28,
 					   halign="left", text_size=(350, None), color=[1, 1, 1, 1], size_hint=(1, .1))
 
 		b1.add_widget(label1)
@@ -121,7 +126,7 @@ class KeltischKruisScreen(Screen):
 
 		PopupUitleg = Popup(title="Interpretation",
 							title_color= [1,1,1,1],
-							title_size= 18,
+							title_size= 28,
 							title_align= "justify",
 							separator_color = [0,1,0,1],
 							separator_height= 1,
