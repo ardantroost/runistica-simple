@@ -24,7 +24,7 @@ class KeltischKruisScreen(Screen):
 			rune_set.append(teken)
 
 		runeworp = random.sample(rune_set,5)
-		print(runeworp)
+
 
 		conn.commit()
 		conn.close()
@@ -100,7 +100,7 @@ class KeltischKruisScreen(Screen):
 			runeuitleg = c.fetchone()
 			conn.commit()
 			conn.close()
-			print(runeuitleg)
+
 			self.Popup_uitleg(runeuitleg)
 
 	def Popup_uitleg(self, runeuitleg):
@@ -109,10 +109,10 @@ class KeltischKruisScreen(Screen):
 		Image1 = Image(source="RunenTekens/"+ (runeuitleg[0]).lower()+ ".png")
 		b1 = BoxLayout(orientation="vertical", spacing=10)
 
-		label1 = Label(text=runeuitleg[1], font_size=18, bold=True,
-					   halign="left", color=[0, 1, 0, 1], size_hint=(1, .1))
-		label2 = Label(text=format(runeuitleg[2]), font_size=12,
-					   halign="left", text_size=(150, None), color=[0, 1, 0, 1], size_hint=(1, .1))
+		label1 = Label(text=runeuitleg[0]+": "+runeuitleg[1], font_size=28, bold=True,
+					   halign="left", color=[1, 0, 0, 1], size_hint=(1, .1))
+		label2 = Label(text=format(runeuitleg[2]), font_size=18,
+					   halign="left", text_size=(self.width-150, None), color=[1, 1, 1, 1], size_hint=(1, .1))
 
 		b1.add_widget(label1)
 		b1.add_widget(label2)
@@ -120,18 +120,18 @@ class KeltischKruisScreen(Screen):
 		b.add_widget(b1)
 
 		PopupUitleg = Popup(title="Interpretation",
-							title_color= [0,1,0,1],
+							title_color= [1,1,1,1],
 							title_size= 18,
 							title_align= "justify",
 							separator_color = [0,1,0,1],
 							separator_height= 1,
 						  content=b,
 						  size_hint=(None, None),
-						  size=(200, 200),
-						  pos_hint= {"center_x":.7,"center_y":.25},
-							# background_color = [1, 1, 1, 1],
-							background = "Layout/road.jpg ",
-						  auto_dismiss=True)
+						  size=(300, 500),
+						  pos_hint= {"center_x":.5,"center_y":.5},
+							background_color=[1, 1, 1, 1],
+							background="Layout/road.jpg",
+							auto_dismiss=True)
 
 		PopupUitleg.open()
 

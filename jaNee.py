@@ -6,8 +6,6 @@ from kivy.uix.screenmanager import Screen
 
 class JaNeeScreen(Screen):
 
-
-
 	def runensetwerpen(self):
 
 		conn = sqlite3.connect("dataRunistica.db")
@@ -20,7 +18,7 @@ class JaNeeScreen(Screen):
 			rune_set.append(teken)
 
 		runeworp = random.sample(rune_set, 3)
-		print(runeworp)
+
 		conn.commit()
 		conn.close()
 
@@ -64,9 +62,9 @@ class JaNeeScreen(Screen):
 			self.ids._plaatje1.source = "RunenTekens/"+ (runeworp[0][0]).lower() +".png"
 			self.ids._plaatje2.source = "RunenTekens/"+ (runeworp[1][0]).lower() +".png"
 			self.ids._plaatje3.source = "RunenTekens/"+ (runeworp[2][0]).lower() +".png"
-			self.ids._RuneNaam1.text  = "Runeteken\n" + runeworp[0][0]
-			self.ids._RuneNaam2.text  = "Runeteken\n" + runeworp[1][0]
-			self.ids._RuneNaam3.text  = "Runeteken\n" + runeworp[2][0]
+			self.ids._RuneNaam1.text  = runeworp[0][0]
+			self.ids._RuneNaam2.text  = runeworp[1][0]
+			self.ids._RuneNaam3.text  = runeworp[2][0]
 
 			antwoord1 = ["The answer is Yes.\nNone of your runes indicate any form of doubt.",
 						"The answer is No.\nYour runes indicate a clear no",
@@ -100,7 +98,6 @@ class JaNeeScreen(Screen):
 				self.ids._UitlegAntwoord.text = antwoord1[1]
 
 		else:
-			print("Runenconflict: opnieuw geworpen!")
 			self.runensetwerpen()
 
 

@@ -13,30 +13,30 @@ class PopupRune(Popup):
 	RuneTeken = StringProperty("")
 	RuneTekst = StringProperty("")
 
-
 class SingleRuneScreen(Screen):
 
-	def Display(self,RuneWorp1,keuze_Credo,keuze_RuneText):
+	def Display(self,RuneWorp1,keuze_Credo,keuze_RuneText, keuze_naam):
 
 			self.b = BoxLayout(orientation="vertical")
 
 			self.Image1 = Image(source=RuneWorp1)
 			self.b1 = BoxLayout(orientation="vertical",spacing=10)
-			self.label1 = Label(text=keuze_Credo,font_size=18,bold=True,halign="left",color=[1,0,0,1], size_hint=(1,.1))
-			self.label2 = Label(text="kernwoorden voor jou vandaag zijn: \n {}".format(keuze_RuneText),
-						   font_size=12,halign="left",text_size=(150,None),color=[1,0,0,1],size_hint=(1,.1))
+			self.label1 = Label(text=keuze_naam+": \n"+ keuze_Credo,
+								font_size=32,bold=True,halign="left",color=[1,0,0,1], size_hint=(1,.1))
+			self.label2 = Label(text="Keywords of the message: \n {}".format(keuze_RuneText),
+						   font_size=18,halign="left",text_size=(self.width-150, None),color=[1,1,1,1],size_hint=(1,.1))
 
 			self.b1.add_widget(self.label1)
 			self.b1.add_widget(self.label2)
 			self.b.add_widget(self.Image1)
 			self.b.add_widget(self.b1)
 
-			self.PopupWorp = Popup(title="Jouw Rune vd Dag",
+			self.PopupWorp = Popup(title="Your day's rune",
 							  separator_color = [1,0,0,.6],
 							  content=self.b,
 							  size_hint=(None,None),
-							  size= (200,400),
-							  pos_hint= {"center_x":.6,"center_y":.3},
+							  size= (self.width-50,self.height-150),
+							  pos_hint= {"center_x":.5,"center_y":.5},
 							  background_color = [0,1,0,1],
 							  background="Layout/road.jpg",
 							  auto_dismiss=True)
@@ -58,12 +58,13 @@ class SingleRuneScreen(Screen):
 		keuze_rune = (rune_set[a][0]).lower() + ".png"
 		keuze_Credo = rune_set[a][1]
 		keuze_RuneText = rune_set[a][2]
+		keuze_naam = rune_set[a][0]
 		RuneWorp1 = "RunenTekens/" + keuze_rune
 
 		conn.commit()
 		conn.close()
 
-		self.Display(RuneWorp1,keuze_Credo,keuze_RuneText)
+		self.Display(RuneWorp1,keuze_Credo,keuze_RuneText, keuze_naam)
 
 
 

@@ -1,0 +1,74 @@
+#: import singleRune singleRune
+
+<SingleRuneScreen>:
+
+	BoxLayout:
+		orientation:"vertical"
+
+		canvas:
+			Color:
+				rgba: 1,0,0,1
+			Rectangle:
+				size: self.width,self.height
+				source:"Layout/road.jpg"
+			#Color:
+			#	rgba: 1,1,1,1
+			#Ellipse:
+			#	size:300,300
+			#	pos:300,300
+
+		Label:
+			text: "Today's Rune\n [color=#FFFFFF][size=24]Werp jouw dagvoorspelling [/color][/size] "
+			color: 1,1,1,1
+			halign: "center"
+			font_size: dp(48)
+			size_hint:(1,1)
+			pos_hint:{"center_x":.5,"center_y":.75}
+			markup: True
+
+		Label:
+			id: _RuneTeken
+			text: ""
+			color: 1,1,1,1
+			font_size: 12
+			size_hint:(1,1)
+			pos_hint:{"center_x":.5}
+
+		Label:
+			id: _Gekozenrune
+			canvas:
+				Color:
+					rgba: 1,1,1,1
+				#Ellipse:
+				#Rectangle:
+				#	source: "Layout/Eyes.png"
+				#	size: 100,100
+				#	pos:125,200
+
+		BoxLayout:
+			orientation: "vertical"
+			size:100,200
+
+			Button:
+				id: _WerpRune
+				text:"Throw\n your runestone"
+				font_size:dp(18)
+				halign: "center"
+				color: 1,1,1,1
+				background_color:1,1,1,0
+				size_hint: (.25,.05)
+				pos_hint:{"center_x": 0.5}
+
+				on_press:
+					root.Worp()
+
+			Button:
+				text:"<< Menu >>"
+				font_size:dp(14)
+				color: 1,1,1,1
+				background_color:1,1,1,0
+				size_hint: (.1,.05)
+				pos_hint:{"center_x": 0.75}
+				on_press:
+					root.manager.current="settingsscreen"
+					root.manager.transition.direction="right"

@@ -1,4 +1,4 @@
-#: import Welcome Welcome
+#: import welcome welcome
 
 <WelcomeScreen>:
 	BoxLayout:
@@ -12,21 +12,9 @@
 			Color:
 				rgba: 1,1,1,1
 			Ellipse:
-				size:self.width,350
-				pos:70,150
-			Ellipse:
-				size:100,100
-				pos:-20,-50
-			Color:
-				rgba: 1,1,1,1
-			Ellipse:
-				size:400,400
-				pos:-200,450
-			Color:
-				rgba: 1,0,0,1
-			Ellipse:
-				size:250,250
-				pos:-100,525
+				size:1000,1600
+				pos:-160,150
+
 
 		Label:
 
@@ -35,14 +23,15 @@
 					rgba: 1,1,1,1
 				Rectangle:
 					size:240,240
-					pos: 110,230
+					pos: 130,230
 					source: "Layout/Logo runistica.png"
 
 		Button:
 			id: _EnterButton
 			text: "Enter"
+			font_size: dp(18)
 			color: 1,1,1,1
 			background_color:0,0,1,0
 			size_hint: (.2,.1)
-			pos_hint:{"center_x":0.75, "center_y":0}
+			pos_hint:{"center_x":0.80, "center_y":0}
 			on_press: root.manager.current = "settingsscreen"

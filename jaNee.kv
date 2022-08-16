@@ -1,8 +1,41 @@
-#:import JaNee JaNee
+#:import jaNee jaNee
+
+<RuneImage@Image>
+
+	background_color: 1,1,1,0
+	background_normal:""
+	canvas.before:
+		Color:
+			rgba:1,1,1,.75
+		Ellipse:
+			size:self.size
+			pos: self.pos
+	source:""
+	size_hint:None,None
+	width:75
+	height:75
+	pos_hint:{"center_x":.5}
+
+
+<AntwLabel@Label>
+	background_color: 1,1,1,0
+	background_normal:""
+	canvas.before:
+		Color:
+			rgba: [1,1,1,1]
+		RoundedRectangle:
+			size: self.size
+			pos:self.pos
+			radius: [8]
+	font_size: dp(24)
+	halign:"center"
+	valign:"center"
+	pos_hint:{"center_x":.5}
+
 
 <RuneLabel@Label>:
 
-	font_size: 12
+	font_size: dp(12)
 	color:1,1,1,1
 	size_hint: (1,.1)
 
@@ -17,24 +50,11 @@
 				rgba: 1,0,1,1
 			Rectangle:
 				size: self.width, self.height
-				source: "Layout/tree.jpg"
-
-			Color:
-				rgba:1,1,1,.75
-			Ellipse:
-				size:100,100
-				pos: self.center_x-160,self.center_y-60
-			Ellipse:
-				size:100,100
-				pos: self.center_x-50,self.center_y-60
-			Ellipse:
-				size:100,100
-				pos: self.center_x+60,self.center_y-60
-
+				source: "Layout/road.jpg"
 		Label:
 			text: "Ja/Néé vragen\n [color=#FFFFFF][size=12]3 stenen werpen voor een antwoord [/color][/size] "
 			color: 0,1,0,1
-			font_size: 30
+			font_size: dp(30)
 			size_hint:(1,1)
 			pos_hint:{"center_x":.5}
 			markup:True
@@ -42,18 +62,23 @@
 		GridLayout:
 			cols: 3
 			columns:2
-			size_hint:None,None
-			size: 350,120
+			padding:20
+			spacing: 20
+			#size_hint:None,None
+			#size: 350,120
+			size:self.size
+			pos: self.pos
 
-			Image:
+			RuneImage:
 				id: _plaatje1
-				source: "RunenTekens/isa.png"
-			Image:
+				source: "Runentekens/gebo.png"
+
+			RuneImage:
 				id: _plaatje2
-				source: "RunenTekens/ehwaz.png"
-			Image:
+				source: "Runentekens/gebo.png"
+			RuneImage:
 				id: _plaatje3
-				source: "RunenTekens/berkana.png"
+				source: "Runentekens/gebo.png"
 
 			RuneLabel:
 				id: _RuneNaam1
@@ -64,26 +89,20 @@
 			RuneLabel:
 				id: _RuneNaam3
 				text: "-3-"
-		Label:
+
+		AntwLabel:
 			id: _UitlegAntwoord
 			text: "Stel je vraag\n en werp jouw runenstenen"
 			text_size: (185,None)
-			font_size: 12
+			font_size: dp(14)
 			italic:True
 			color:1,0,0,1
-			size_hint: (1,.60)
-
-			canvas.before:
-				Color:
-					rgba: 1,1,1,1
-
-				RoundedRectangle:
-					size:self.width - 90 , self.height-70
-					pos: self.center_x-125, self.center_y-60
+			size_hint: (.75,.6)
+			#pos:self.pos
 
 		Button:
 			text:"<< Werp >>"
-			font_size:13
+			font_size:dp(13)
 			color: 1,1,1,1
 			background_color: 1,1,1,0.2
 			size_hint: (.4,.1)
@@ -93,7 +112,7 @@
 
 		Button:
 			text:"<< Back >>"
-			font_size:13
+			font_size:dp(13)
 			color: 1,1,1,1
 			background_color: 0,0,1,0
 			size_hint: (.2,.1)

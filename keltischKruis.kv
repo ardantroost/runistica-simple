@@ -1,4 +1,4 @@
-#:import KeltischKruis KeltischKruis
+#:import keltischKruis keltischKruis
 
 <KeltischKruisScreen>:
 	BoxLayout:
@@ -10,43 +10,39 @@
 				rgba: 0,1,0,1
 			Rectangle:
 				size: self.width,self.height
-				source:'Layout/druide.png'
-			Color:
-				rgba: 1,1,1,.5
-			Ellipse:
-				size: 250,250
-				pos: 50,180
+				source:'Layout/road.jpg'
 
 		Label:
-			text: "Keltisch Kruis\n[color=#FFFFFF][size=12]Werp 5 stenen voor een voorspelling [/color][/size] "
+			text: "Keltisch Kruis\n[color=#FFFFFF][size=24]Werp 5 stenen voor een voorspelling [/color][/size] "
 			halign: "center"
-			font_size: 40
+			font_size: dp(40)
 			size_hint:(1,1)
-			#pos_hint:{"center_x":.5}
 			markup:True
 
 		GridLayout:
 			columns:3
 			cols:3
-			spacing:15
-			#padding: 10
+			spacing:40
 
 			Label:
 				text: ""
 				size_hint:(1,1)
 			BoxLayout:
 				orientation:"vertical"
-				spacing: 10
+				spacing: 0
 				Image:
 					id: _HelpImage
 					source: "RunenTekens/gebo.png"
-					size_hint:(1,1)
+					#size_hint:(1,1)
+					size_hint:None,None
+					width:50
+					height:50
 					pos_hint:{"center_x":.5}
 				Button
 					id: _HelpButton
 					text: "Help"
-					font_size: 12
-					size_hint:(1,.2)
+					font_size: dp(15)
+					#size_hint:(1,.5)
 					pos_hint:{"center_x":.5}
 					background_color: 1,0,0,0
 					on_release:
@@ -57,47 +53,56 @@
 
 			BoxLayout:
 				orientation:"vertical"
-				spacing: 10
+				spacing: 0
 				Image:
 					id: _PastImage
 					source: "RunenTekens/gebo.png"
-					size_hint:(1,1)
+					#size_hint:(1,1)
+					size_hint:None,None
+					width:50
+					height:50
 					pos_hint:{"center_x":.5}
 				Button:
 					id: _PastButton
 					text: "Past"
-					font_size: 12
+					font_size: dp(15)
 					background_color: 1,0,0,0
 					on_release:
 						root.Rune_interpretatie("Past")
 
 			BoxLayout:
 				orientation:"vertical"
-				spacing: 10
+				spacing: 0
 				Image:
 					id: _PresentImage
 					source: "RunenTekens/gebo.png"
-					size_hint:(1,1)
+					#size_hint:(1,1)
+					size_hint:None,None
+					width:50
+					height:50
 					pos_hint:{"center_x":.5}
 				Button:
 					id: _PresentButton
 					text: "Present"
-					font_size: 12
+					font_size: dp(15)
 					background_color: 1,0,0,0
 					on_release:
 						root.Rune_interpretatie("Present")
 			BoxLayout:
 				orientation:"vertical"
-				spacing: 10
+				spacing: 0
 				Image:
 					id: _FutureImage
 					source: "RunenTekens/gebo.png"
-					size_hint:(1,1)
+					#size_hint:(1,1)
+					size_hint:None,None
+					width:50
+					height:50
 					pos_hint:{"center_x":.5}
 				Button:
 					id: _FutureButton
 					text: "Future"
-					font_size: 12
+					font_size: dp(15)
 					background_color: 1,0,0,0
 					on_release:
 						root.Rune_interpretatie("Future")
@@ -107,16 +112,19 @@
 
 			BoxLayout:
 				orientation:"vertical"
-				spacing: 10
+				spacing: 0
 				Image:
 					id: _ObstacleImage
 					source: "RunenTekens/gebo.png"
-					size_hint:(1,1)
+					#size_hint:(1,1)
+					size_hint:None,None
+					width:50
+					height:50
 					pos_hint:{"center_x":.5}
 				Button:
 					id: _ObstacleButton
 					text: "Obstacle"
-					font_size: 12
+					font_size: dp(15)
 					background_color: 1,0,0,0
 					on_release:
 						root.Rune_interpretatie("Obstacle")
@@ -125,15 +133,15 @@
 				size_hint:(1,1)
 		Label:
 			id: _StelJeVraag
-			text: "-- Stel jezelf een vraag en gooi --"
-			font_size: 10
+			text: ""
+			font_size: dp(10)
 			italic: True
 			size_hint:(1,.25)
 			pos_center_y:.1
 
 		Button:
 			text:"<<Gooi jouw runen>>"
-			font_size: 14
+			font_size: dp(16)
 			bold:True
 			color: 1,1,1,1
 			background_normal:''
@@ -141,13 +149,11 @@
 			size_hint: (0.5,.25)
 			pos_hint:{"center_x": 0.5,"top":0.5}
 			on_release:
-				_StelJeVraag.text = "Click name for Rune explanation"
 				root.RunenWorp()
 		Button:
 			text:"<<Menu>>"
-			font_size: 10
+			font_size: dp(14)
 			color: 1,1,1,1
-			#halign: "center"
 			background_normal:''
 			background_color: 1,1,1,0
 			size_hint: (0.25,.1)
