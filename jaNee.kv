@@ -4,16 +4,20 @@
 
 	background_color: 1,1,1,0
 	background_normal:""
+
 	canvas.before:
 		Color:
 			rgba:1,1,1,.75
 		Ellipse:
-			size:self.size
+			size:self.width+10, self.height+10
 			pos: self.pos
 	source:"RunenTekens/gebo.png"
-	size_hint:None,None
-	width:75
-	height:75
+	#size_hint:None,None
+	#width:75
+	#height:75
+	allow_stretch:True
+	keep_ratio:False
+	image_ratio:
 	pos_hint:{"center_x":.5}
 
 
@@ -22,12 +26,14 @@
 	background_normal:""
 	canvas.before:
 		Color:
-			rgba: [1,1,1,.21]
+			rgba: [1,1,1,.2]
 		RoundedRectangle:
 			size: self.size
 			pos:self.pos
 			radius: [8]
+
 	font_size: dp(24)
+	color: 1,1,1,1
 	halign:"center"
 	valign:"center"
 	size_hint:(1,.25)
@@ -70,11 +76,8 @@
 
 		GridLayout:
 			cols: 3
-			#columns:2
 			padding:60
 			spacing: 20
-			#size:self.size
-			#pos: self.pos
 
 			BoxLayout:
 				orientation: "vertical"
@@ -84,7 +87,7 @@
 				RuneLabel:
 					id: _RuneNaam1
 					text: "-1-"
-					size_hint:1,.05
+					size_hint:1,.1
 			BoxLayout:
 				orientation: "vertical"
 				RuneImage:
@@ -93,7 +96,7 @@
 				RuneLabel:
 					id: _RuneNaam2
 					text: "-2-"
-					size_hint:1,.05
+					size_hint:1,.1
 			BoxLayout:
 				orientation: "vertical"
 
@@ -103,7 +106,7 @@
 				RuneLabel:
 					id: _RuneNaam3
 					text: "-3-"
-					size_hint:1,.05
+					size_hint:1,.1
 
 		AntwLabel:
 			id: _UitlegAntwoord
@@ -112,7 +115,7 @@
 			font_size: dp(14)
 			halign: "left"
 			italic:True
-			color:1,0,0,1
+			color:1,1,1,1
 			size_hint: (.75,.6)
 
 

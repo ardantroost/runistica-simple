@@ -17,9 +17,10 @@ class SingleRuneScreen(Screen):
 
 	def Display(self,RuneWorp1,keuze_Credo,keuze_RuneText, keuze_naam):
 
-			self.b = BoxLayout(orientation="vertical")
+			self.b = BoxLayout(orientation="vertical",size_hint=(1,.7))
 
-			self.Image1 = Image(source=RuneWorp1)
+			self.Image1 = Image(source=RuneWorp1, size_hint=(None,None),
+					width=120,height=120,allow_stretch=True, keep_ratio=False,pos_hint={"center_x":.5,"center_y":.5})
 			self.b1 = BoxLayout(orientation="vertical",spacing=10)
 			self.label1 = Label(text=keuze_naam+": \n"+ keuze_Credo,
 								font_size=36,bold=True,halign="left",color=[1,0,0,1], size_hint=(1,.1))

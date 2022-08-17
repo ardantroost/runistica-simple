@@ -110,11 +110,11 @@ class KeltischKruisScreen(Screen):
 
 	def Popup_uitleg(self, runeuitleg):
 
-		b = BoxLayout(orientation="vertical")
-		Image1 = Image(source="RunenTekens/"+ (runeuitleg[0]).lower()+ ".png")
-		b1 = BoxLayout(orientation="vertical", spacing=10)
-
-		label1 = Label(text=runeuitleg[0]+": "+runeuitleg[1], font_size=36, bold=True,
+		b = BoxLayout(orientation="vertical",size_hint=(1,.7))
+		Image1 = Image(source="RunenTekens/"+ (runeuitleg[0]).lower()+ ".png",size_hint=(None,None),
+					width=120,height=120,allow_stretch=True, keep_ratio=False,pos_hint={"center_x":.5,"center_y":.5})
+		b1 = BoxLayout(orientation="vertical",spacing=5)
+		label1 = Label(text=runeuitleg[0]+":\n"+runeuitleg[1], font_size=36, bold=True,
 					   halign="left", color=[1, 0, 0, 1], size_hint=(1, .1))
 		label2 = Label(text=format(runeuitleg[2]), font_size=28,
 					   halign="left", text_size=(350, None), color=[1, 1, 1, 1], size_hint=(1, .1))
@@ -132,7 +132,7 @@ class KeltischKruisScreen(Screen):
 							separator_height= 1,
 						  content=b,
 						  size_hint=(None, None),
-						  size=(500, 700),
+						  size=(300, 500),
 						  pos_hint= {"center_x":.5,"center_y":.5},
 							background_color=[1, 1, 1, 1],
 							background="Layout/road.jpg",
