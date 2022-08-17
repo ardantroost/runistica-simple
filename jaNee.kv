@@ -9,15 +9,15 @@
 		Color:
 			rgba:1,1,1,.75
 		Ellipse:
-			size:self.width+10, self.height+10
+			size:self.width+25, self.height+25
 			pos: self.pos
+
 	source:"RunenTekens/gebo.png"
-	#size_hint:None,None
-	#width:75
-	#height:75
+	size_hint:None,None
+	width:120
+	height:120
 	allow_stretch:True
 	keep_ratio:False
-	image_ratio:
 	pos_hint:{"center_x":.5}
 
 
@@ -66,43 +66,42 @@
 				size: self.width, self.height
 				source: "Layout/road.jpg"
 		Label:
-			text: "Yes-or-No questions\n [color=#FFFFFF][size=24] throw 3  runes for an answer[/color][/size] "
+			text: "Yes-or-No questions\n [color=#FFFFFF][size=24]Throw 3 runes and get an answer[/color][/size]"
 			color: 0,1,0,1
 			font_size: dp(30)
-			valign:"center"
+			halign:"center"
 			size_hint:(1,1)
 			pos_hint:{"center_x":.5}
 			markup:True
 
 		GridLayout:
 			cols: 3
-			padding:60
-			spacing: 20
+			padding:25
+			spacing: 0
 
 			BoxLayout:
 				orientation: "vertical"
+				spacing:-50
 				RuneImage:
 					id: _plaatje1
-					#source: ""
 				RuneLabel:
 					id: _RuneNaam1
 					text: "-1-"
 					size_hint:1,.1
 			BoxLayout:
 				orientation: "vertical"
+				spacing:-50
 				RuneImage:
 					id: _plaatje2
-					#source: "Runentekens/gebo.png"
 				RuneLabel:
 					id: _RuneNaam2
 					text: "-2-"
 					size_hint:1,.1
 			BoxLayout:
 				orientation: "vertical"
-
+				spacing:-50
 				RuneImage:
 					id: _plaatje3
-					#source: "Runentekens/gebo.png"
 				RuneLabel:
 					id: _RuneNaam3
 					text: "-3-"
@@ -137,13 +136,15 @@
 			orientation: 'horizontal'
 			#padding:25
 			spacing:60
-			padding:15
+			padding:25
 			size_hint: None, None
 			size: self.minimum_size
 
 			AnchorButton:
 				text: "Menu"
 				font_size: dp(13)
+				size_hint:None,None
+				height:50
 				on_press:
 					_plaatje1.source = "RunenTekens/gebo.png"
 					_plaatje2.source = "RunenTekens/gebo.png"
@@ -151,6 +152,7 @@
 					_RuneNaam1.text= "-1-"
 					_RuneNaam2.text= "-2-"
 					_RuneNaam3.text= "-3-"
+					_UitlegAntwoord.text ="Ask a yes-or-no question\n and throw the runestones"
 
 
 					root.manager.current="settingsscreen"
@@ -159,6 +161,8 @@
 			AnchorButton:
 				text: "Quit"
 				font_size: dp(13)
+				size_hint:None,None
+				height:50
 				on_press:
 					quit()
 

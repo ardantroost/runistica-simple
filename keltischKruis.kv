@@ -11,31 +11,33 @@
 <KeltischKruisScreen>:
 	BoxLayout:
 		orientation:"vertical"
-
 		padding:40
+
 		canvas:
 			Color:
 				rgba: 0,1,0,1
 			Rectangle:
 				size: self.width,self.height
 				source:'Layout/road.jpg'
-
 		Label:
 			text: "Celtic Cross\n[color=#FFFFFF][size=24] 5-runes-reading for a prediction[/color][/size] "
 			halign: "center"
 			font_size: dp(40)
-			size_hint:(1,1)
+			size_hint:(1,.5)
 			markup:True
+		Label:
+			text:""
+			size_hint:(1,.35)
 
 		GridLayout:
 			columns:3
 			cols:3
-
-			spacing:100
+			padding:0
+			spacing:140
+			size_hint:(1,.5)
 
 			Label:
 				text: ""
-				size_hint:(1,1)
 			BoxLayout:
 				orientation:"vertical"
 				spacing: 5
@@ -49,23 +51,26 @@
 					keep_ratio:False
 					pos_hint:{"center_x":.5}
 				Label:
-					text:''
 				Button
 					id: _HelpButton
 					text: "Help"
 					font_size: dp(15)
-					size_hint:(1,1)
-					pos_hint:{"center_x":.5}
+					#size_hint:(1,1)
+					size_hint:(None,None)
+					width:self.width
+					height:20
+					pos_hint:{"center_x":.5,"center_y":.5}
 					background_color: 1,0,0,0
+					pos_hint:{"center_x":.5}
 					on_release:
 						root.Rune_interpretatie("Help")
 			Label:
 				text: ""
-				size_hint:(1,1)
 
 			BoxLayout:
 				orientation:"vertical"
 				spacing: 5
+
 				Image:
 					id: _PastImage
 					source: "RunenTekens/gebo.png"
@@ -77,16 +82,18 @@
 					color:1,0,0,1
 					pos_hint:{"center_x":.5}
 				Label:
-					text:''
 				Button:
 					id: _PastButton
 					text: "Past"
 					font_size: dp(15)
-					size_hint:(1,1)
+					#size_hint:(1,1)
+					size_hint:(None,None)
+					width:self.width
+					height:25
 					background_color: 1,0,0,0
+					pos_hint:{"center_x":.5}
 					on_release:
 						root.Rune_interpretatie("Past")
-
 			BoxLayout:
 				orientation:"vertical"
 				spacing: 5
@@ -100,13 +107,15 @@
 					keep_ratio:False
 					pos_hint:{"center_x":.5}
 				Label:
-					text:''
 				Button:
 					id: _PresentButton
 					text: "Present"
 					font_size: dp(15)
-					size_hint:(1,1)
+					size_hint:(None,None)
+					width:self.width
+					height:25
 					background_color: 1,0,0,0
+					pos_hint:{"center_x":.5}
 					on_release:
 						root.Rune_interpretatie("Present")
 			BoxLayout:
@@ -123,19 +132,19 @@
 					keep_ratio:False
 					pos_hint:{"center_x":.5}
 				Label:
-					text:''
 				Button:
 					id: _FutureButton
 					text: "Future"
 					font_size: dp(15)
-					size_hint:(1,1)
+					size_hint:(None,None)
+					width:self.width
+					height:25
 					background_color: 1,0,0,0
+					pos_hint:{"center_x":.5}
 					on_release:
 						root.Rune_interpretatie("Future")
 			Label:
 				text: ""
-				size_hint:(1,1)
-
 			BoxLayout:
 				orientation:"vertical"
 				spacing: 5
@@ -149,26 +158,23 @@
 					keep_ratio:False
 					pos_hint:{"center_x":.5}
 				Label:
-					text:''
 				Button:
 					id: _ObstacleButton
 					text: "Obstacle"
 					font_size: dp(15)
-					size_hint:(1,1)
-					background_color: 1,0,0,0
+					size_hint:(None,None)
+					width:self.width
+					height:25
+					background_color: 1,1,1,0
+					pos_hint:{"center_x":.5}
 					on_release:
 						root.Rune_interpretatie("Obstacle")
 			Label:
 				text: ""
 				size_hint:(1,1)
 		Label:
-			id: _StelJeVraag
 			text: ""
-			font_size: dp(10)
-			italic: True
-			size_hint:(1,.25)
-			pos_center_y:.1
-
+			size_hint:(1,.4)
 		Button:
 			text:"<<Throw runes>>"
 			font_size: dp(16)
@@ -176,8 +182,8 @@
 			color: 1,1,1,1
 			background_normal:''
 			background_color: 1,0,0,0
-			size_hint: (0.5,.25)
-			pos_hint:{"center_x": 0.5,"top":0.5}
+			size_hint: (0.5,.15)
+			pos_hint:{"center_x": 0.5}
 			on_release:
 				root.RunenWorp()
 
@@ -187,26 +193,35 @@
 
 		BoxLayout:
 			orientation: 'horizontal'
-			#padding:25
 			spacing:60
-			padding:15
+			padding:25
 			size_hint: None, None
 			size: self.minimum_size
 
 			AnchorButton:
 				text: "Menu"
 				font_size: dp(13)
+				size_hint:None,None
+				height:50
+
 				on_press:
 					_ObstacleImage.source="RunenTekens/gebo.png"
+					_ObstacleButton.text="Obstacles"
 					_HelpImage.source="RunenTekens/gebo.png"
+					_HelpButton.text="Help"
 					_PastImage.source="RunenTekens/gebo.png"
+					_PastButton.text="Past"
 					_PresentImage.source="RunenTekens/gebo.png"
+					_PresentButton.text="Present"
 					_FutureImage.source="RunenTekens/gebo.png"
+					_FutureButton.text="Future"
 					root.manager.current="settingsscreen"
 					root.manager.transition.direction="right"
 
 			AnchorButton:
 				text: "Quit"
 				font_size: dp(13)
+				size_hint:None,None
+				height:50
 				on_press:
 					quit()

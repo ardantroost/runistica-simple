@@ -65,7 +65,7 @@ class KeltischKruisScreen(Screen):
 			runeuitleg = c.fetchone()
 			conn.commit()
 			conn.close()
-			self.Popup_uitleg(runeuitleg)
+			self.Popup_uitleg(runeuitleg,tekst="Help")
 
 		elif Runesign == "Past":
 			keuze = self.ids._PastButton.text
@@ -75,7 +75,7 @@ class KeltischKruisScreen(Screen):
 			runeuitleg = c.fetchone()
 			conn.commit()
 			conn.close()
-			self.Popup_uitleg(runeuitleg)
+			self.Popup_uitleg(runeuitleg,tekst="Past")
 
 		elif Runesign == "Present":
 			keuze = self.ids._PresentButton.text
@@ -85,7 +85,7 @@ class KeltischKruisScreen(Screen):
 			runeuitleg = c.fetchone()
 			conn.commit()
 			conn.close()
-			self.Popup_uitleg(runeuitleg)
+			self.Popup_uitleg(runeuitleg,tekst="Present")
 
 		elif Runesign == "Future":
 			keuze = self.ids._FutureButton.text
@@ -95,7 +95,7 @@ class KeltischKruisScreen(Screen):
 			runeuitleg = c.fetchone()
 			conn.commit()
 			conn.close()
-			self.Popup_uitleg(runeuitleg)
+			self.Popup_uitleg(runeuitleg,tekst="Future")
 
 		elif Runesign == "Obstacle":
 			keuze = self.ids._ObstacleButton.text
@@ -106,9 +106,9 @@ class KeltischKruisScreen(Screen):
 			conn.commit()
 			conn.close()
 
-			self.Popup_uitleg(runeuitleg)
+			self.Popup_uitleg(runeuitleg, tekst="Obstacle")
 
-	def Popup_uitleg(self, runeuitleg):
+	def Popup_uitleg(self, runeuitleg, tekst):
 
 		b = BoxLayout(orientation="vertical",size_hint=(1,.7))
 		Image1 = Image(source="RunenTekens/"+ (runeuitleg[0]).lower()+ ".png",size_hint=(None,None),
@@ -116,24 +116,27 @@ class KeltischKruisScreen(Screen):
 		b1 = BoxLayout(orientation="vertical",spacing=5)
 		label1 = Label(text=runeuitleg[0]+":\n"+runeuitleg[1], font_size=36, bold=True,
 					   halign="left", color=[1, 0, 0, 1], size_hint=(1, .1))
-		label2 = Label(text=format(runeuitleg[2]), font_size=28,
+		label3 = Label(text=format(runeuitleg[2]), font_size=28,
 					   halign="left", text_size=(350, None), color=[1, 1, 1, 1], size_hint=(1, .1))
+		label2 = Label(text="---Regarding your "+ format(tekst) +"---", font_size=28,
+					   halign="left",color=[1, 1, 1, 1], size_hint=(1, .1))
 
 		b1.add_widget(label1)
 		b1.add_widget(label2)
+		b1.add_widget(label3)
 		b.add_widget(Image1)
 		b.add_widget(b1)
 
 		PopupUitleg = Popup(title="Interpretation",
 							title_color= [1,1,1,1],
-							title_size= 28,
+							title_size= 36,
 							title_align= "justify",
 							separator_color = [0,1,0,1],
 							separator_height= 1,
-						  content=b,
-						  size_hint=(None, None),
-						  size=(300, 500),
-						  pos_hint= {"center_x":.5,"center_y":.5},
+							content=b,
+						  	size_hint=(None, None),
+						  	size=(500, 700),
+						  	pos_hint= {"center_x":.5,"center_y":.5},
 							background_color=[1, 1, 1, 1],
 							background="Layout/road.jpg",
 							auto_dismiss=True)
