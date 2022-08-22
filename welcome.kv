@@ -1,6 +1,19 @@
 #: import welcome welcome
 
+<CountryButton@Button>:
+
+	size_hint:(.1,1)
+	pos_hint:{"center_x":.5}
+	background_color:0,0,0,0
+
+	Image:
+		id:_country
+		source:""
+		center_x:self.parent.center_x
+		center_y:self.parent.center_y
+
 <WelcomeScreen>:
+
 	BoxLayout:
 		orientation: "vertical"
 
@@ -21,7 +34,6 @@
 				pos:-260,450
 				#source:"Layout/road.jpg"
 
-
 		Label:
 			canvas:
 				Color:
@@ -32,12 +44,62 @@
 					pos: 130,230
 					source: "Layout/Logo runistica.png"
 
-		Button:
-			id: _EnterButton
-			text: "Enter"
-			font_size: dp(18)
-			color: 1,1,1,1
-			background_color:0,0,1,0
-			size_hint: (.2,.1)
-			pos_hint:{"center_x":0.80, "center_y":0}
-			on_press: root.manager.current = "settingsscreen"
+	AnchorLayout:
+		anchor_x: "right"
+		anchor_y: "top"
+		padding:10
+
+		BoxLayout:
+			orientation: 'horizontal'
+			size_hint: .5,1
+
+			Button:
+				size_hint:(.25,.1)
+				pos_hint:{"center_x":.5}
+				background_color:0,0,0,0
+				on_press:
+					root.manager.current = "settingsscreen"
+					#waarde uk meegeven
+					root.manager.lanquage ="en"
+					root.manager.Proef("en")
+
+				Image:
+					source:"Layout/FlagofGreatBritain.png"
+					center_x:self.parent.center_x
+					center_y:self.parent.center_y
+			Button:
+				size_hint:(.25,.1)
+				pos_hint:{"center_x":.5}
+				background_color:0,0,0,0
+				on_press:
+					root.manager.current = "settingsscreen"
+					root.manager.lanquage = "fr"
+					root.manager.Proef("fr")
+				Image:
+					source:"Layout/FlagofFrance.png"
+					center_x:self.parent.center_x
+					center_y:self.parent.center_y
+			Button:
+				size_hint:(.25,.1)
+				pos_hint:{"center_x":.5}
+				background_color:0,0,0,0
+				on_press:
+					root.manager.current = "settingsscreen"
+					root.manager.lanquage="de"
+					root.manager.Proef("de")
+				Image:
+					source:"Layout/FlagofGermany.png"
+					center_x:self.parent.center_x
+					center_y:self.parent.center_y
+			Button:
+				size_hint:(.25,.1)
+				pos_hint:{"center_x":.5}
+				background_color:0,0,0,0
+				on_press:
+					root.manager.current = "settingsscreen"
+					root.manager.lanquage ="nl"
+					root.manager.Proef("nl")
+				Image:
+					source:"Layout/FlagofHolland.png"
+					center_x:self.parent.center_x
+					center_y:self.parent.center_y

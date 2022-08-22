@@ -50,17 +50,25 @@
 			orientation: "vertical"
 			size:100,200
 			Button:
-				id: _WerpRune
-				text:"Throw\n your runestone"
+				id: _B4a
+				text:""
 				font_size:dp(18)
 				halign: "center"
 				color: 1,1,1,1
 				background_color:1,1,1,0
 				size_hint: (.25,.05)
-				pos_hint:{"center_x": 0.5}
-
+				pos_hint:{"center_x": 0.5, "center_y": 1}
 				on_press:
 					root.Worp()
+
+				canvas.before:
+					Color:
+						rgba: 1,1,1,.3
+					Ellipse:
+						size: 100, 100
+						#pos:self.center_x,self.center_y
+						pos:self.x-10,self.center_y-50
+
 	AnchorLayout:
 		anchor_x: "right"
 		anchor_y: "top"

@@ -1,4 +1,5 @@
 from kivy.uix.screenmanager import Screen
 
 class SettingsScreen(Screen):
-	pass
+	def on_enter(self):
+		pass

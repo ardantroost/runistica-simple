@@ -1,5 +1,13 @@
 #:import settings settings
 
+<AnchorButton@Button>:
+	text: ""
+	size_hint:None,None
+	size: 50,30
+	color:[1,1,1,1]
+	font_size:dp(12)
+	background_color:1,1,1,0
+
 <Bbutton@Button>
 
 	background_color: 1,0,0,0
@@ -23,22 +31,6 @@
 				source:'Layout/road.jpg'
 			Color:
 				rgba: 0,1,1,.5
-			#Ellipse:
-			#	size: 100,100
-			#	pos: 20,150
-			#	source:'Layout/Eyes.png'
-			#Color:
-			#	rgba: 0,0,1,.5
-			#Ellipse:
-			#	size: 100,100
-			#	pos: 125,150
-			#	source:'Layout/Eyes.png'
-			#Color:
-			#	rgba: 0,1,0,.5
-			#Ellipse:
-			#	size: 100,100
-			#	pos: 230,150
-			#	source:'Layout/Eyes.png'
 
 		BoxLayout:
 			orientation: "vertical"
@@ -63,6 +55,7 @@
 						pos: 60,540
 						source:'Layout/Eyes.png'
 				Bbutton:
+					id:_B1
 					text: "Jouw\n DagRune\n werpen"
 					halign: "left"
 					font_size: dp(14)
@@ -79,6 +72,7 @@
 							pos: 300,540
 							source:'Layout/Eyes.png'
 				Bbutton:
+					id:_B2
 					text: "Een\n Ja-of-Néé vraag\n stellen"
 					halign: "center"
 					font_size: dp(14)
@@ -97,6 +91,7 @@
 							source:'Layout/Eyes.png'
 
 				Bbutton:
+					id:_B3
 					text: "Een\n openvraag\n stellen"
 					halign: "right"
 					font_size: dp(14)
@@ -105,12 +100,23 @@
 					on_press:
 						root.manager.current = "keltischkruisscreen"
 						root.manager.transition.direction = "left"
+			Label:
+				id:_CountryChoice
+				text:""
+				size_hint:(1,.05)
 
-			Button:
+	AnchorLayout:
+		anchor_x: "right"
+		anchor_y: "top"
+
+		BoxLayout:
+			orientation: 'horizontal'
+			padding:25
+			size_hint: None, None
+			size: self.minimum_size
+
+			AnchorButton:
 				text: "Quit"
-				font_size:dp(14)
-				background_color: [0,0,0,1]
-				background_normal: ""
-				size_hint:(1,.125)
-
-				on_press: quit()
+				font_size: dp(13)
+				on_press:
+					quit()

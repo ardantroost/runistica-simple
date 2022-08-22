@@ -9,14 +9,52 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 
-
 class KeltischKruisScreen(Screen):
+
+	def on_enter(self, *args):
+
+		self.lanquage = self.manager.lanquage
+		print(self.lanquage+" !test!")
+		if self.lanquage == 'en':
+			self.ids._HelpButton.text = "Help"
+			self.ids._PastButton.text = "Past"
+			self.ids._PresentButton.text = "Present"
+			self.ids._FutureButton.text = "Future"
+			self.ids._ObstacleButton.text = "Obstacle"
+			self.ids._Header.text = \
+				"The Celtic Cross\n[color=#FFFFFF][size=24] Fortune telling by a five-runes-reading[/color][/size]"
+		elif self.lanquage == 'fr':
+			self.ids._HelpButton.text = "l'aide"
+			self.ids._PastButton.text = "le passée"
+			self.ids._PresentButton.text = "le present"
+			self.ids._FutureButton.text = "le future"
+			self.ids._ObstacleButton.text = "Les obstacles"
+			self.ids._Header.text = \
+				"La Croix celtique\n[color=#FFFFFF][size=24] Des prédictions par une lecture de cinq runes[/color][/size]"
+
+		elif self.lanquage == 'de':
+			self.ids._HelpButton.text = "Hielfe"
+			self.ids._PastButton.text = "Vergangenheit"
+			self.ids._PresentButton.text = "Heute"
+			self.ids._FutureButton.text ="Zukunft"
+			self.ids._ObstacleButton.text = "Hindernisse"
+			self.ids._Header.text = \
+				"Das keltisches Kreuz\n[color=#FFFFFF][size=24] Wahrsagen durch eine Fünf-Runen-Lesung[/color][/size]"
+
+		elif self.lanquage == 'nl':
+			self.ids._HelpButton.text = "Hulp"
+			self.ids._PastButton.text = "Verleden"
+			self.ids._PresentButton.text = "Heden"
+			self.ids._FutureButton.text ="Toekomst"
+			self.ids._ObstacleButton.text = "Hindernissen"
+			self.ids._Header.text = \
+				"Het keltisch Kruis\n[color=#FFFFFF][size=24] Toekomstvoorspelling door een vijf-runen-lezing[/color][/size]"
 
 	def RunenWorp(self):
 
-		conn = sqlite3.connect("dataRunistica.db")
+		conn = sqlite3.connect("dataRunistica_nw.db")
 		c = conn.cursor()
-		c.execute("SELECT RuneNaam,RuneCredo, RuneText, Signtype FROM Runistica")
+		c.execute("SELECT RuneNaam,RuneCredo, RuneText, Signtype FROM Runistica_en")
 		datarune = c.fetchall()
 
 		rune_set = []
@@ -56,59 +94,164 @@ class KeltischKruisScreen(Screen):
 
 	def Rune_interpretatie(self, Runesign):
 
-		if Runesign == "Help":
+		self.lanquage = self.manager.lanquage
 
-			keuze = self.ids._HelpButton.text
-			conn = sqlite3.connect("dataRunistica.db")
-			c = conn.cursor()
-			c.execute("SELECT RuneNaam,RuneCredo, RuneText FROM Runistica WHERE RuneNaam = (?)", (keuze,))
-			runeuitleg = c.fetchone()
-			conn.commit()
-			conn.close()
-			self.Popup_uitleg(runeuitleg,tekst="Help")
+		if Runesign == "Help":
+			try:
+				keuze = self.ids._HelpButton.text
+				conn = sqlite3.connect("dataRunistica_nw.db")
+				c = conn.cursor()
+
+				if self.lanquage == 'en':
+					c.execute("SELECT RuneNaam,RuneCredo, RuneText FROM Runistica_en WHERE RuneNaam = (?)", (keuze,))
+					tekst="Help"
+				elif self.lanquage == 'fr':
+					c.execute("SELECT RuneNaam,RuneCredo_fr,RuneText_fr, Signtype_fr FROM Runistica_en WHERE RuneNaam = (?)", (keuze,))
+					tekst = "l'aide"
+				elif self.lanquage == 'de':
+					c.execute("SELECT RuneNaam,RuneCredo_de,RuneText_de, Signtype_de FROM Runistica_en WHERE RuneNaam = (?)", (keuze,))
+					tekst = "die Hielfe"
+				elif self.lanquage == 'nl':
+					c.execute("SELECT RuneNaam,RuneCredo_nl,RuneText_nl, Signtype_nl FROM Runistica_en WHERE RuneNaam = (?)", (keuze,))
+					tekst = "Hulp"
+				runeuitleg = c.fetchone()
+				conn.commit()
+				conn.close()
+				self.Popup_uitleg(runeuitleg,tekst=tekst)
+			except:
+				self.manager.Popup_Choose("press throw!")
 
 		elif Runesign == "Past":
-			keuze = self.ids._PastButton.text
-			conn = sqlite3.connect("dataRunistica.db")
-			c = conn.cursor()
-			c.execute("SELECT RuneNaam,RuneCredo, RuneText FROM Runistica WHERE RuneNaam = (?)", (keuze,))
-			runeuitleg = c.fetchone()
-			conn.commit()
-			conn.close()
-			self.Popup_uitleg(runeuitleg,tekst="Past")
+			try:
+				keuze = self.ids._PastButton.text
+				conn = sqlite3.connect("dataRunistica_nw.db")
+				c = conn.cursor()
+				if self.lanquage == 'en':
+					c.execute("SELECT RuneNaam,RuneCredo, RuneText FROM Runistica_en WHERE RuneNaam = (?)", (keuze,))
+					tekst="the past"
+				elif self.lanquage == 'fr':
+					c.execute("SELECT RuneNaam,RuneCredo_fr,RuneText_fr, Signtype_fr FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst="le temps passé"
+
+				elif self.lanquage == 'de':
+					c.execute("SELECT RuneNaam,RuneCredo_de,RuneText_de, Signtype_de FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst = "Vergangenheit"
+				elif self.lanquage == 'nl':
+					c.execute("SELECT RuneNaam,RuneCredo_nl,RuneText_nl, Signtype_nl FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst = "het verleden"
+
+				runeuitleg = c.fetchone()
+				conn.commit()
+				conn.close()
+				self.Popup_uitleg(runeuitleg,tekst=tekst)
+			except:
+				self.manager.Popup_Choose("press throw!")
 
 		elif Runesign == "Present":
-			keuze = self.ids._PresentButton.text
-			conn = sqlite3.connect("dataRunistica.db")
-			c = conn.cursor()
-			c.execute("SELECT RuneNaam,RuneCredo, RuneText FROM Runistica WHERE RuneNaam = (?)", (keuze,))
-			runeuitleg = c.fetchone()
-			conn.commit()
-			conn.close()
-			self.Popup_uitleg(runeuitleg,tekst="Present")
+			try:
+				keuze = self.ids._PresentButton.text
+				conn = sqlite3.connect("dataRunistica_nw.db")
+				c = conn.cursor()
+				if self.lanquage == 'en':
+					c.execute("SELECT RuneNaam,RuneCredo, RuneText FROM Runistica_en WHERE RuneNaam = (?)", (keuze,))
+					tekst= "the present"
+				elif self.lanquage == 'fr':
+					c.execute("SELECT RuneNaam,RuneCredo_fr,RuneText_fr, Signtype_fr FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst = "le present"
+				elif self.lanquage == 'de':
+					c.execute("SELECT RuneNaam,RuneCredo_de,RuneText_de, Signtype_de FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst = "heute"
+				elif self.lanquage == 'nl':
+					c.execute("SELECT RuneNaam,RuneCredo_nl,RuneText_nl, Signtype_nl FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst = "heute"
+
+				runeuitleg = c.fetchone()
+				conn.commit()
+				conn.close()
+				self.Popup_uitleg(runeuitleg,tekst=tekst)
+			except:
+				self.manager.Popup_Choose("press throw!")
 
 		elif Runesign == "Future":
-			keuze = self.ids._FutureButton.text
-			conn = sqlite3.connect("dataRunistica.db")
-			c = conn.cursor()
-			c.execute("SELECT RuneNaam,RuneCredo, RuneText FROM Runistica WHERE RuneNaam = (?)", (keuze,))
-			runeuitleg = c.fetchone()
-			conn.commit()
-			conn.close()
-			self.Popup_uitleg(runeuitleg,tekst="Future")
+			try:
+				keuze = self.ids._FutureButton.text
+				conn = sqlite3.connect("dataRunistica_nw.db")
+				c = conn.cursor()
+				if self.lanquage == 'en':
+					c.execute("SELECT RuneNaam,RuneCredo, RuneText FROM Runistica_en WHERE RuneNaam = (?)", (keuze,))
+					tekst= 'The future'
+				elif self.lanquage == 'fr':
+					c.execute("SELECT RuneNaam,RuneCredo_fr,RuneText_fr, Signtype_fr FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst = "le futur"
+				elif self.lanquage == 'de':
+					c.execute("SELECT RuneNaam,RuneCredo_de,RuneText_de, Signtype_de FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst = "die Zukunft"
+				elif self.lanquage == 'nl':
+					c.execute("SELECT RuneNaam,RuneCredo_nl,RuneText_nl, Signtype_nl FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst = "de toekomst"
+
+				runeuitleg = c.fetchone()
+				conn.commit()
+				conn.close()
+				self.Popup_uitleg(runeuitleg,tekst=tekst)
+			except:
+				self.manager.Popup_Choose("press throw!")
 
 		elif Runesign == "Obstacle":
-			keuze = self.ids._ObstacleButton.text
-			conn = sqlite3.connect("dataRunistica.db")
-			c = conn.cursor()
-			c.execute("SELECT RuneNaam,RuneCredo, RuneText FROM Runistica WHERE RuneNaam = (?)", (keuze,))
-			runeuitleg = c.fetchone()
-			conn.commit()
-			conn.close()
-
-			self.Popup_uitleg(runeuitleg, tekst="Obstacle")
+			try:
+				keuze = self.ids._ObstacleButton.text
+				conn = sqlite3.connect("dataRunistica_nw.db")
+				c = conn.cursor()
+				if self.lanquage == 'en':
+					c.execute("SELECT RuneNaam,RuneCredo, RuneText FROM Runistica_en WHERE RuneNaam = (?)", (keuze,))
+					tekst= "obstacles"
+					self.ids._ObstacleButton.tekst="Obstacle"
+				elif self.lanquage == 'fr':
+					c.execute("SELECT RuneNaam,RuneCredo_fr,RuneText_fr, Signtype_fr FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst= "des obstacles"
+					self.root.ids._ObstacleButton.tekst = "Obstacles"
+				elif self.lanquage == 'de':
+					c.execute(
+						"SELECT RuneNaam,RuneCredo_de,RuneText_de, Signtype_de FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst="Hindernisse"
+					self.ids._ObstacleButton.tekst = "Obstacle"
+				elif self.lanquage == 'nl':
+					c.execute("SELECT RuneNaam,RuneCredo_nl,RuneText_nl, Signtype_nl FROM Runistica_en WHERE RuneNaam = (?)",
+						(keuze,))
+					tekst="obstakels"
+					self.ids._ObstacleButton.tekst = "Hindernissen"
+				runeuitleg = c.fetchone()
+				conn.commit()
+				conn.close()
+				self.Popup_uitleg(runeuitleg, tekst=tekst)
+			except:
+				self.manager.Popup_Choose("press throw!")
 
 	def Popup_uitleg(self, runeuitleg, tekst):
+
+		if self.lanquage == "en":
+			self.a = "Interpretation of the rune"
+			self.c ="--- Regarding "+ format(tekst) +"---"
+		if self.lanquage == "fr":
+			self.a = "Interprétation de la rune"
+			self.c = "--- Quant à " + format(tekst) + "---"
+		if self.lanquage == "de":
+			self.a = "Interpretation der Rune"
+			self.c = "--- Was ihre " + format(tekst) + " angeht""---"
+		if self.lanquage == "nl":
+			self.a = "Interpretatie van de rune"
+			self.c = "--- Wat betreft uw " + format(tekst) + "---"
 
 		b = BoxLayout(orientation="vertical",size_hint=(1,.7))
 		Image1 = Image(source="RunenTekens/"+ (runeuitleg[0]).lower()+ ".png",size_hint=(None,None),
@@ -118,7 +261,7 @@ class KeltischKruisScreen(Screen):
 					   halign="left", color=[1, 0, 0, 1], size_hint=(1, .1))
 		label3 = Label(text=format(runeuitleg[2]), font_size=28,
 					   halign="left", text_size=(350, None), color=[1, 1, 1, 1], size_hint=(1, .1))
-		label2 = Label(text="---Regarding your "+ format(tekst) +"---", font_size=28,
+		label2 = Label(text=self.c, font_size=28,
 					   halign="left",color=[1, 1, 1, 1], size_hint=(1, .1))
 
 		b1.add_widget(label1)
@@ -127,7 +270,7 @@ class KeltischKruisScreen(Screen):
 		b.add_widget(Image1)
 		b.add_widget(b1)
 
-		PopupUitleg = Popup(title="Interpretation",
+		PopupUitleg = Popup(title=self.a,
 							title_color= [1,1,1,1],
 							title_size= 36,
 							title_align= "justify",
